@@ -1,0 +1,8 @@
+## Interface: 11400
+## Title: My|cFF34FDF0Sanctified|r
+## Notes: Tracks and displays the number of sanctified gear items equipped.
+## Author: Pegga
+## SavedVariables: MySanctifiedDB
+## Version: 1.0
+
+mystantified.lua
