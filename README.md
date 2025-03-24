@@ -1,5 +1,5 @@
 # MySantified
-Tracks and displays the number of sanctified gear items equipped.
+**Tracks and displays the number of sanctified gear items equipped.**
 
 Hello my guild, we meet again
 It's been a grind, where should we begin?
