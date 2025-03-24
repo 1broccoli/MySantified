@@ -262,26 +262,24 @@ frame:SetScript("OnDragStop", function(self)
     UpdateGearCount()
 end)
 
+local function UpdateAll()
+    UpdateSealOfTheDawnTexture()
+    UpdateGearCount()
+end
+
 frame:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:RegisterEvent("ADDON_LOADED")
-frame:RegisterEvent("PLAYER_REGEN_ENABLED")
-frame:RegisterEvent("PLAYER_REGEN_DISABLED")
-frame:RegisterEvent("PLAYER_TARGET_CHANGED")
-frame:RegisterEvent("CHARACTER_POINTS_CHANGED")
-frame:RegisterEvent("UNIT_INVENTORY_CHANGED")
 frame:RegisterEvent("UNIT_AURA")
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function(self, event, arg1)
     if event == "ADDON_LOADED" and arg1 == "MySanctified" then
         LoadFramePosition()
-        UpdateGearCount() -- Update gear count when addon is loaded
+        UpdateAll() -- Update all when addon is loaded
     elseif event == "UNIT_AURA" and arg1 == "player" then
-        UpdateSealOfTheDawnTexture()
-        UpdateGearCount()
+        UpdateAll()
     elseif event == "PLAYER_ENTERING_WORLD" then
-        UpdateGearCount()
-    else
+        UpdateAll()
+    elseif event == "PLAYER_EQUIPMENT_CHANGED" then
         UpdateGearCount()
     end
 end)
@@ -289,6 +287,7 @@ end)
 if CharacterFrame then
     CharacterFrame:HookScript("OnShow", function()
         frame:Show() -- Show the frame when the Character Frame is shown
+        UpdateAll() -- Update all when the Character Frame is shown
     end)
 
     CharacterFrame:HookScript("OnHide", function()
@@ -296,5 +295,5 @@ if CharacterFrame then
     end)
 end
 
--- Call UpdateGearCount immediately after creating the frame to update the text
-UpdateGearCount()
+-- Call UpdateAll immediately after creating the frame to update the text and texture
+UpdateAll()
