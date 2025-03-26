@@ -267,6 +267,17 @@ local function UpdateAll()
     UpdateGearCount()
 end
 
+local lastUpdate = 0
+local updateInterval = 2 -- Update at most once per second
+
+local function DebouncedUpdateAll()
+    local currentTime = GetTime()
+    if currentTime - lastUpdate >= updateInterval then
+        lastUpdate = currentTime
+        UpdateAll()
+    end
+end
+
 frame:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:RegisterEvent("ADDON_LOADED")
@@ -276,11 +287,11 @@ frame:SetScript("OnEvent", function(self, event, arg1)
         LoadFramePosition()
         UpdateAll() -- Update all when addon is loaded
     elseif event == "UNIT_AURA" and arg1 == "player" then
-        UpdateAll()
+        DebouncedUpdateAll()
     elseif event == "PLAYER_ENTERING_WORLD" then
         UpdateAll()
     elseif event == "PLAYER_EQUIPMENT_CHANGED" then
-        UpdateGearCount()
+        DebouncedUpdateAll()
     end
 end)
 
