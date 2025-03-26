@@ -268,7 +268,7 @@ local function UpdateAll()
 end
 
 local lastUpdate = 0
-local updateInterval = 2 -- Update at most once per second
+local updateInterval = 1 -- Update at most once per second
 
 local function DebouncedUpdateAll()
     local currentTime = GetTime()
@@ -281,7 +281,7 @@ end
 frame:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:RegisterEvent("ADDON_LOADED")
-frame:RegisterEvent("UNIT_AURA")
+
 frame:SetScript("OnEvent", function(self, event, arg1)
     if event == "ADDON_LOADED" and arg1 == "MySanctified" then
         LoadFramePosition()

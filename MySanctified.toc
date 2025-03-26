@@ -3,6 +3,6 @@
 ## Notes: Tracks and displays the number of sanctified gear items equipped.
 ## Author: Pegga
 ## SavedVariables: MySanctifiedDB
-## Version: 1.2
+## Version: 1.2.1
 
 mystantified.lua
